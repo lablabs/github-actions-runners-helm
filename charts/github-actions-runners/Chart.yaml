@@ -1,7 +1,9 @@
 apiVersion: v2
 name: github-actions-runners
 description: A Helm chart for deploying Github runners resources for actions-runner-controller
-
+maintainers:
+  - name: martinhaus
+    email: martin.hauskrecht@lablabs.io
 # A chart can be either an 'application' or a 'library' chart.
 #
 # Application charts are a collection of templates that can be packaged into versioned archives

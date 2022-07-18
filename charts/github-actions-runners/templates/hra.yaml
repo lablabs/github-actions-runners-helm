@@ -1,0 +1,18 @@
+apiVersion: actions.summerwind.dev/v1alpha1
+kind: HorizontalRunnerAutoscaler
+metadata:
+  name: {{ include "github-actions-runners.fullname" . }}
+  labels:
+    {{- include "github-actions-runners.labels" . | nindent 4 }}
+spec:
+  scaleDownDelaySecondsAfterScaleOut: {{ .Values.autoscaling.scaleDownDelaySecondsAfterScaleOut }}
+  scaleTargetRef:
+    name: {{ include "github-actions-runners.fullname" . }}
+  minReplicas: {{ .Values.autoscaling.minReplicas }}
+  maxReplicas: {{ .Values.autoscaling.maxReplicas }}
+  metrics:
+    {{- toYaml .Values.autoscaling.metrics | nindent 4 }}
+  {{- with .Values.autoscaling.scheduledOverrides }}
+  scheduledOverrides:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}

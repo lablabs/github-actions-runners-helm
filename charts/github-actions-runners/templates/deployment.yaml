@@ -1,0 +1,99 @@
+---
+apiVersion: actions.summerwind.dev/v1alpha1
+kind: RunnerDeployment
+metadata:
+  name: {{ include "github-actions-runners.fullname" . }}
+  labels:
+    {{- include "github-actions-runners.labels" . | nindent 4 }}
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
+  template:
+    spec:
+      {{- with .Values.repository }}
+      repository: {{ . }}
+      {{- end }}
+      {{- with .Values.organization }}
+      organization: {{ . }}
+      {{- end }}
+      {{- with .Values.labels }}
+      labels:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      dockerEnabled: {{ .Values.dockerEnabled }}
+      {{- with .Values.dockerEnv }}
+      dockerEnv:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.dockerRegistryMirror }}
+      dockerRegistryMirror: {{ . }}
+      {{- end }}
+      {{- with .Values.dockerVolumeMounts }}
+      dockerVolumeMounts:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.dockerdContainerResources }}
+      dockerdContainerResources:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      dockerdWithinRunnerContainer: {{ .Values.dockerdWithinRunnerContainer }}
+      {{- with .Values.env }}
+      env:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.envFrom }}
+      envFrom:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      ephemeral: {{ .Values.ephemeral }}
+      {{- with .Values.envFrom }}
+      ephemeralContainers:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.image }}
+      image: {{ . }}
+      {{- end }}
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      automountServiceAccountToken: {{ .Values.automountServiceAccountToken }}
+      serviceAccountName: {{ include "github-actions-runners.serviceAccountName" . }}
+      {{- with .Values.dnsConfig }}
+      dnsConfig:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.containers }}
+      containers:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.sidecarContainers }}
+      sidecarContainers:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.initContainers }}
+      initContainers:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      terminationGracePeriodSeconds: {{ .Values.terminationGracePeriodSeconds }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.volumes }}
+      volumes:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.volumeMounts }}
+      volumeMounts:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}

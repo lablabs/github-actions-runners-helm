@@ -17,6 +17,9 @@ spec:
       {{- with .Values.organization }}
       organization: {{ . }}
       {{- end }}
+      {{- with .Values.group }}
+      group: {{ . }}
+      {{- end }}
       {{- with .Values.labels }}
       labels:
         {{- toYaml . | nindent 8 }}

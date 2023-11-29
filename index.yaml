@@ -2,6 +2,18 @@ apiVersion: v1
 entries:
   github-actions-runners:
   - apiVersion: v2
+    created: "2023-11-29T09:57:53.782461589Z"
+    description: A Helm chart for deploying Github runners resources for actions-runner-controller
+    digest: a6a3a96d7c172a982f0288d462ed31ed03814c7e04e8198ad6a72156f97c9607
+    maintainers:
+    - email: martin.hauskrecht@lablabs.io
+      name: martinhaus
+    name: github-actions-runners
+    type: application
+    urls:
+    - https://github.com/lablabs/github-actions-runners-helm/releases/download/github-actions-runners-0.2.1/github-actions-runners-0.2.1.tgz
+    version: 0.2.1
+  - apiVersion: v2
     created: "2023-10-25T10:15:38.582141239Z"
     description: A Helm chart for deploying Github runners resources for actions-runner-controller
     digest: 0166b7bac46740810f672ed5ceda6f48c3f60b611b1e4e31540696881a7a0bdc
@@ -25,4 +37,4 @@ entries:
     urls:
     - https://github.com/lablabs/github-actions-runners-helm/releases/download/github-actions-runners-0.1.1/github-actions-runners-0.1.1.tgz
     version: 0.1.1
-generated: "2023-10-25T10:15:38.58214914Z"
+generated: "2023-11-29T09:57:53.782489151Z"
